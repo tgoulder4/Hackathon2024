@@ -1,0 +1,1 @@
+export const applicationName = "[Hackathon Project Name]";

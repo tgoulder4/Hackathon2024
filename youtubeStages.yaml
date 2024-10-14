@@ -1,0 +1,74 @@
+- I'm Tye Goulder, and I'm currently designing and developing a website for a company.
+  For every stage of the project I send out email updates to the client to keep them informed. They would like to edit their website's pages.
+  So I'll 
+- 0.1. rough ui design on figma
+- 0.2. db design excelidraw
+- 1. create next app
+- mongo
+- create .env w/ db_url string and add to gitignore
+- installed hono
+- layout.tsx changed body font cln to manrope
+- created globals.css:
+[check globals.css h1,h2,h3,*]
+
+- changed page.tsx to :
+ export default function Home() {
+  return (
+    <main className="">
+    </main>
+  );
+- route files watermarkCheckingRoute.ts, pageParams.ts:
+- in each:
+import { Hono } from 'hono'
+const app = new Hono()
+    .get('/', async (c) => { })
+
+export default app;
+- route.ts: 
+import { handle } from 'hono/vercel'
+...
+export const GET = handle(app)
+export const POST = handle(app)
+export type AppType = typeof app;
+# https://www.prisma.io/docs/getting-started/setup-prisma/add-to-existing-project/mongodb-typescript-mongodb 
+npm install prisma --save-dev
+npx prisma init
+- change schema.prisma datasource to:
+datasource db {
+  provider     = "mongodb"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+- following excelidraw db design:
+[enter least version prisma schema here]
+
+- create /lib/db/prisma.ts:
+import { PrismaClient } from '@prisma/client';
+import * as dotenv from 'dotenv/config'
+const prismaClientSingleton = () => {
+    return new PrismaClient();
+
+const globalForPrisma = globalThis as unknown as {
+    prisma: ReturnType<typeof prismaClientSingleton> | undefined;
+
+const prisma = globalForPrisma.prisma ?? prismaClientSingleton();
+export default prisma;
+if (process.env.NODEENV !== 'production') {
+    globalForPrisma.prisma = prisma;
+
+export const prismaClient = prisma;
+
+- create /lib/db/client.ts:
+import { AppType } from './../../app/api/[[...route]]/route';
+import { hc } from "hono/client";
+
+export const client = hc<AppType>(process.env.NEXT_PUBLIC_API_URL!);
+
+- auth:
+
+------------------
+
+- routes:
+  buildwithtye.com // hire me landing
+  portfolio.buildwithtye.com // my portfolio
+  sentinel.buildwithtye.com // freelance management

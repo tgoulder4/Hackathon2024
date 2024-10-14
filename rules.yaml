@@ -1,0 +1,1 @@
+- 1. Do NOT use zod schemas as validation for anything except data transfer.
