@@ -6,7 +6,7 @@ import { mainFont } from "@/lib/fonts";
 
 export const metadata: Metadata = {
   title: applicationName,
-  description: "Manage your projects with Tye",
+  description: "Whackwinnerz' Warwick hackathon project",
 };
 
 export default function RootLayout({
