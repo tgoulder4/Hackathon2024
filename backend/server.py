@@ -1,10 +1,10 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
-
+from flask import request
 app = Flask(__name__)
 CORS(app)
 
-@app.route("/api/home", methods["GET"])
+@app.route("/api/home", methods=["GET"])
 def return_home():
     return jsonify({
         'message':'test server response'

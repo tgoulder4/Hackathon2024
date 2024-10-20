@@ -6,6 +6,12 @@ import { redirect } from 'next/navigation';
 import React from 'react'
 
 type Props = {}
+async function assertAuth() {
+    const user = await validateRequest();
+    if (!user || !user.user || user.user.email !== 'admin@admin.com') {
+        redirect('/forbidden')
+    }
+}
 async function addMeAsFirstUserSA(formData: FormData) {
     'use server'
     console.log("Adding first user");
