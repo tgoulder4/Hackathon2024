@@ -1,6 +1,9 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
 from flask import request
+from zaira import return_name
+
+
 app = Flask(__name__)
 CORS(app)
 
@@ -11,4 +14,6 @@ def return_home():
     })
 
 if __name__ == "__main__":
+    return_name()
     app.run(debug=True, port=8080)
+    
